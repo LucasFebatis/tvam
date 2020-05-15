@@ -8,6 +8,7 @@ module.exports = {
     const {
       print: { info },
       template: { generate },
+      // system
     } = toolbox
 
     // 1. Select Tizen (Samsung) or Web OS (LG) or Both
@@ -45,17 +46,51 @@ module.exports = {
     // let mkdir = 'mkdir myapp'
     // let cmd = system.run(`${mkdir}`)
 
-    generate({
-      template: 'vue.package.json',
-      target: `myapp/package.json`
-    })
-
     // cmd.then((val) => {
-      
+
+    generateVueJs(generate)
 
     // }).catch((error) => {
     //   info(error)
     // })
 
   },
+}
+
+function generateVueJs(generate) {
+  
+  generate({
+    template: 'vuejs/dist/index.html',
+    target: `myapp/dist/index.html`
+  })
+
+  generate({
+    template: 'vuejs/src/App.vue',
+    target: `myapp/src/App.vue`
+  })
+
+  generate({
+    template: 'vuejs/src/index.js',
+    target: `myapp/src/index.js`
+  })
+
+  generate({
+    template: 'vuejs/.gitignore',
+    target: `myapp/.gitignore`
+  })
+
+  generate({
+    template: 'vuejs/README.md',
+    target: `myapp/README.md`
+  })
+
+  generate({
+    template: 'vuejs/package.json',
+    target: `myapp/package.json`
+  })
+
+  generate({
+    template: 'vuejs/webpack.config.js',
+    target: `myapp/webpack.config.js`
+  })
 }
