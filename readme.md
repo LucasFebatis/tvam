@@ -1,6 +1,36 @@
-# tvam CLI
+# Tv App Manager Cli
 
-A CLI for tvam.
+Atualmente criando, buildando, servindo e instalando apps 
+
+Tizen com VueJs
+
+Futuramente a ideia é ser possivel criar projetos para a Web OS da LG, e usar Vue.js e React
+
+## Installation
+
+`npm install`
+
+or
+
+`yarn add`
+
+## Usage
+
+### tvam create
+
+Criar projeto
+
+### tvam serve
+
+Subir servidor de desenvolvimento
+
+### tvam build
+
+Buildar projeto
+
+### tvam install
+
+Instalar app no device conectado
 
 ## Customizing your CLI
 
