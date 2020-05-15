@@ -8,7 +8,7 @@ module.exports = {
     const {
       print: { info },
       template: { generate },
-      // system
+      system
     } = toolbox
 
     // 1. Select Tizen (Samsung) or Web OS (LG) or Both
@@ -27,13 +27,7 @@ module.exports = {
         name: 'jsFramework',
         message: 'Which framework will you use?',
         choices: ['Vue.js', 'React (In Roadmap)', 'Node.js (In Roadmap)', 'only Javascript (In Roadmap)'],
-      },
-      {
-        type: 'select',
-        name: 'packageManager',
-        message: 'Which package manager will you use?',
-        choices: ['npm', 'yarn'],
-      },
+      }
     ])
 
     if (result.platform.includes('(In Roadmap)') || result.platform.includes('(In Roadmap)')) {
@@ -43,16 +37,29 @@ module.exports = {
 
     info("Criando projeto Tizen com Vue.js")
 
-    // let mkdir = 'mkdir myapp'
-    // let cmd = system.run(`${mkdir}`)
-
-    // cmd.then((val) => {
+    let mkdir = 'mkdir myapp'
+    await system.run(`${mkdir}`)
 
     generateVueJs(generate)
 
-    // }).catch((error) => {
-    //   info(error)
-    // })
+    let cdIn = 'cd myapp'
+
+    let createTizen = 'tizen create web-project -n tizenProject -t BasicEmptyProject -p tv-samsung-5.0'
+    await system.run(`${cdIn};${createTizen}`)
+
+    prepareTizenProject(system, generate)
+    
+    info('Projeto criado')
+    // Mostrar comandos
+    // Mostrar docs
+
+    // tvam build
+    // yarn build
+    // cp -av dist tizenProject
+    // tizen package -t wgt -s emulator
+
+    // tvam install
+    // tizen install -n tizenProject.wgt -- /Users/lucasbatista/Projetos/Pessoais/vuejs/vue-webpack/tizenProject
 
   },
 }
