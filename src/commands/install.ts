@@ -8,7 +8,17 @@ module.exports = {
   run: async (toolbox: GluegunToolbox) => {
     const {
       print: { info },
+      system
     } = toolbox
+    
+    let cdIn = 'cd tizenProject'
+    let createTizen = 'tizen install -n tizenProject.wgt -- /Users/lucasbatista/Projetos/Pessoais/vuejs/vue-webpack/tizenProject'
+    let result = await system.run(`${cdIn};${createTizen}`)
+    
+    info(result)
+    info(``)
+    info(`Se a instalação foi sucedida e o app não é mostrado, pode ser que vc precise reiniciar a tv ou o emulador`)
+    info(``)
     info(`install command executed`)
   },
 }
