@@ -27,6 +27,10 @@ const config = {
       '.vue'
     ]
   },
+  devServer: {
+    contentBase: './dist'
+  },
+  devtool: 'eval-source-map',
   plugins: [
     new VueLoaderPlugin()
   ]
