@@ -1,8 +1,9 @@
-
 <template>
-  <h1>
-    {{name}}
-  </h1>
+  <div id="app">
+    <h1>
+      {{ name }}
+    </h1>
+  </div>
 </template>
 
 <script lang="ts">
@@ -17,4 +18,11 @@
   });
 </script>
 
-
+<style scoped>
+/* Por padrão tizen renderiza background com black */
+#app {
+  background: white;
+  min-height: 100vh;
+  display: flex;
+}
+</style>
