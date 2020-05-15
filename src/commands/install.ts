@@ -12,7 +12,7 @@ module.exports = {
     } = toolbox
     
     let cdIn = 'cd tizenProject'
-    let createTizen = 'tizen install -n tizenProject.wgt -- /Users/lucasbatista/Projetos/Pessoais/vuejs/vue-webpack/tizenProject'
+    let createTizen = `tizen install -n tizenProject.wgt -- ./`
     let result = await system.run(`${cdIn};${createTizen}`)
     
     info(result)
