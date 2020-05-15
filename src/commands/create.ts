@@ -94,3 +94,24 @@ function generateVueJs(generate) {
     target: `myapp/webpack.config.js`
   })
 }
+
+function prepareTizenProject(system, generate) {
+
+  // Remover index.html e main.js e pasta css
+  let cdIn = 'cd myapp/tizenProject'
+  let remove = 'rm -rf index.html main.js css'
+  system.run(`${cdIn};${remove}`)
+
+  // Modificar config.xml
+  generate({
+    template: 'tizen/config.xml',
+    target: `myapp/tizenProject/config.xml`
+  })
+
+  // Add .gitignore
+  generate({
+    template: 'tizen/.gitignore',
+    target: `myapp/tizenProject/.gitignore`
+  })
+
+}
