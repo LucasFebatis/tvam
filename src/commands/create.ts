@@ -52,15 +52,6 @@ module.exports = {
     info('Projeto criado')
     // Mostrar comandos
     // Mostrar docs
-
-    // tvam build
-    // yarn build
-    // cp -av dist tizenProject
-    // tizen package -t wgt -s emulator
-
-    // tvam install
-    // tizen install -n tizenProject.wgt -- /Users/lucasbatista/Projetos/Pessoais/vuejs/vue-webpack/tizenProject
-
   },
 }
 
