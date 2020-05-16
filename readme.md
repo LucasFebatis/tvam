@@ -19,6 +19,12 @@ or
 
 ## Usage
 
+### tvam doctor
+
+Verifica se você tem o Tizen CLI configurado corretamente
+
+É executado antes do create
+
 ### tvam create
 
 Criar projeto
