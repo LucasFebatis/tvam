@@ -1,3 +1,6 @@
+
+[![npm version](https://badge.fury.io/js/tvam.svg)](https://badge.fury.io/js/tvam)
+
 # Tv App Manager Cli
 
 Atualmente criando, buildando, servindo e instalando apps 

@@ -1,8 +1,9 @@
 {
   "name": "tvam",
   "version": "0.0.1",
-  "description": "tvam CLI",
-  "private": true,
+  "description": "Tv App Manager CLI",
+  "private": false,
+  "author": "Lucas Batista",
   "types": "build/types/types.d.ts",
   "bin": {
     "tvam": "bin/tvam"
