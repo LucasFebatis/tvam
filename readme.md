@@ -11,11 +11,11 @@ Futuramente a ideia é ser possivel criar projetos para a Web OS da LG, e usar V
 
 ## Installation
 
-`npm install`
+`npm i -g tvam`
 
 or
 
-`yarn add`
+`yarn global add tvam`
 
 ## Usage
 
