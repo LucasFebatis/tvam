@@ -12,6 +12,8 @@ module.exports = {
       parameters
     } = toolbox
 
+    await system.run(`tvam doctor`)
+
     if(!parameters.first) {
       info('Informe o nome do projeto: e.g tvam create myApp')
       return
