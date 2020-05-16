@@ -8,8 +8,18 @@ module.exports = {
   run: async (toolbox: GluegunToolbox) => {
     const {
       print: { info },
-      system
+      system,
+      parameters
     } = toolbox
+
+    if(parameters.first) {
+      if(parameters.first.includes(".wgt")) {
+        let localInstall = `tizen install -n ${parameters.first} -- ./`
+        let localResult = await system.run(`${localInstall}`)
+        info(localResult)
+        return
+      }
+    }
     
     let cdIn = 'cd tizenProject'
     let createTizen = `tizen install -n tizenProject.wgt -- ./`
