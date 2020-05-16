@@ -68,6 +68,8 @@ module.exports = {
     info('Tizen: https://developer.tizen.org/')
     info('Vue.js: https://vuejs.org/')
     info('')
+    info('webOS TV: http://webostv.developer.lge.com/')
+    info('')
     info('Good Coding!!!')
   },
 }
