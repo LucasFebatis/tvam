@@ -17,6 +17,12 @@ or
 
 `yarn global add tvam`
 
+## Tutoriais
+
+[Passo a Passo: Instalando no Tizen](https://github.com/LucasFebatis/tvam/blob/master/docs/tutorial%20install%20on%20tizen.md)
+
+[Passo a Passo: Instalando no Web OS](https://github.com/LucasFebatis/tvam/blob/master/docs/tutorial%20install%20on%20web%20os.md)
+
 ## Usage
 
 ### tvam doctor
