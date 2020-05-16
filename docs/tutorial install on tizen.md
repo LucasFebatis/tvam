@@ -7,6 +7,8 @@ https://developer.tizen.org/development/tizen-studio/download
 
 Você pode optar por baixar apenas o CLI ou ter o conjunto com IDE
 
+Você vai precisar garantir que o Tizen CLI esteja no PATH
+
 Para esse tutorial, será preciso ter baixado o conjunto com a IDE, para ter as ferramentas embutidas
 
 - package-manager
