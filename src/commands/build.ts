@@ -9,29 +9,58 @@ module.exports = {
     const {
       print: { info },
       system,
-      parameters
+      parameters,
+      prompt
     } = toolbox
 
-    let projectCert = parameters.first
-
-    if (!parameters.first || parameters.first.toLowerCase() == "tvamDebug") {
-      info('Usando perfil de Debug')
-      projectCert = "tvamDebug"
-      generateCertAndProfileIfNecessary(info, system)
-    }
+    const resultBuild = await prompt.ask([
+      {
+        type: 'select',
+        name: 'platform',
+        message: 'Build to',
+        choices: ['Tizen (Samsung)', 'Web OS (LG)', 'Both'],
+      },
+    ])
 
     let yarnInstall = 'yarn install'
     let yarnBuild = 'yarn build'
-    let cpDist = 'cp -av dist tizenProject'
-    let cdIn = 'cd tizenProject'
-    let tizenBuild = `tizen package -t wgt -s ${projectCert}`
 
-    let result = await system.run(`${yarnInstall};${yarnBuild};${cpDist};${cdIn};${tizenBuild}`)
+    await system.run(`${yarnInstall};${yarnBuild}`)
 
-    info(result)
-    info(``)
-    info(`Se tudo ocorreu bem vc deve ter um novo wgt na pasta tizenProject esperando para ser instalado ou publicado`)
-    info(``)
+    if (resultBuild.platform == "Tizen (Samsung)" || resultBuild.platform == "Both") {
+
+      let projectCert = parameters.array[0]
+
+      if (!parameters.first || parameters.first.toLowerCase() == "tvamDebug") {
+        info('Usando perfil de Debug')
+        projectCert = "tvamDebug"
+        generateCertAndProfileIfNecessary(info, system)
+      }
+
+      let cpDist = 'cp -av dist tizenProject'
+      let cdIn = 'cd tizenProject'
+      let tizenBuild = `tizen package -t wgt -s ${projectCert}`
+
+      await system.run(`${cpDist};${cdIn};${tizenBuild}`)
+
+      info(``)
+      info(`Se tudo ocorreu bem vc deve ter um novo wgt na pasta tizenProject esperando para ser instalado ou publicado`)
+      info(``)
+
+    }
+
+    if (resultBuild.platform == "Web OS (LG)" || resultBuild.platform == "Both") {
+
+      let cpDist = 'cp -av dist webOSProject'
+      let webosBuild = 'ares-package webOSProject -o ./webOSProject'
+
+      await system.run(`${cpDist};${webosBuild}`)
+
+      info(``)
+      info(`Se tudo ocorreu bem vc deve ter um novo ipk na pasta webOSProject esperando para ser instalado ou publicado`)
+      info(``)
+
+    }
 
     info(`build command executed`)
   },
