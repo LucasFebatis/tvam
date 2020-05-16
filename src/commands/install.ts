@@ -44,7 +44,7 @@ module.exports = {
       },
     ])
 
-    if (resultInstall.platform == "Tizen (Samsung)") {
+    if (resultInstall.platform === "Tizen (Samsung)") {
 
       let cdIn = 'cd tizenProject'
       let installTizen = `tizen install -n tizenProject.wgt -- ./`
@@ -56,7 +56,7 @@ module.exports = {
 
     }
 
-    if (resultInstall.platform == "Web OS (LG)") {
+    if (resultInstall.platform === "Web OS (LG)") {
 
       let cdIn = 'cd webOSProject'
       let installwebOS = `ares-install com.domain.app_0.0.1_all.ipk`

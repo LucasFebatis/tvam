@@ -27,14 +27,14 @@ module.exports = {
 
     await system.run(`${yarnInstall};${yarnBuild}`)
 
-    if (resultBuild.platform == "Tizen (Samsung)" || resultBuild.platform == "Both") {
+    if (resultBuild.platform === "Tizen (Samsung)" || resultBuild.platform === "Both") {
 
       let projectCert = parameters.array[0]
 
-      if (!parameters.first || parameters.first.toLowerCase() == "tvamDebug") {
+      if (!parameters.first || parameters.first.toLowerCase() === "tvamDebug") {
         info('Usando perfil de Debug')
         projectCert = "tvamDebug"
-        generateCertAndProfileIfNecessary(info, system)
+        await generateCertAndProfileIfNecessary(info, system)
       }
 
       let cpDist = 'cp -av dist tizenProject'
@@ -49,7 +49,7 @@ module.exports = {
 
     }
 
-    if (resultBuild.platform == "Web OS (LG)" || resultBuild.platform == "Both") {
+    if (resultBuild.platform === "Web OS (LG)" || resultBuild.platform === "Both") {
 
       let cpDist = 'cp -av dist webOSProject'
       let webosBuild = 'ares-package webOSProject -o ./webOSProject'
