@@ -59,6 +59,7 @@ module.exports = {
     if (resultInstall.platform === "Web OS (LG)") {
 
       let cdIn = 'cd webOSProject'
+      // ares-inspect -a com.domain.app -d tv2
       let installwebOS = `ares-install com.domain.app_0.0.1_all.ipk`
       await system.run(`${cdIn};${installwebOS}`)
 
