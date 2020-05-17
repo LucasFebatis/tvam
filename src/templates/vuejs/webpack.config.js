@@ -1,6 +1,6 @@
-const webpack = require('webpack');
-const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const webpack = require('webpack')
+const path = require('path')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const config = {
   entry: './src/index.js',
@@ -21,26 +21,18 @@ const config = {
       },
       {
         test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
+        use: ['vue-style-loader', 'css-loader']
       }
     ]
   },
   resolve: {
-    extensions: [
-      '.js',
-      '.vue'
-    ]
+    extensions: ['.js', '.vue']
   },
   devServer: {
     contentBase: './dist'
   },
   devtool: 'eval-source-map',
-  plugins: [
-    new VueLoaderPlugin()
-  ]
-};
+  plugins: [new VueLoaderPlugin()]
+}
 
-module.exports = config;
+module.exports = config
