@@ -13,6 +13,8 @@ module.exports = {
 
     let resultTizen = await system.run('tizen version')
     let resultWebOs = await system.run('ares --version')
+    
+    info(``)
 
     if(resultTizen.includes('command not found')) {
       info(`Tizen CLI não encontrado`)
