@@ -14,7 +14,7 @@ module.exports = {
 
     await system.run(`tvam doctor`)
 
-    if(!parameters.first) {
+    if (!parameters.first) {
       info('Informe o nome do projeto: e.g tvam create myApp')
       return
     }
@@ -30,7 +30,7 @@ module.exports = {
         type: 'select',
         name: 'platform',
         message: 'Which platform will you develop?',
-        choices: ['Tizen (Samsung)', 'Web OS (LG) (In Roadmap)', 'Both (In Roadmap)'],
+        choices: ['Tizen (Samsung)', 'Web OS (LG)', 'Both'],
       },
       {
         type: 'select',
@@ -40,12 +40,12 @@ module.exports = {
       }
     ])
 
-    if (result.platform.includes('(In Roadmap)') || result.platform.includes('(In Roadmap)')) {
+    if (result.platform.includes('(In Roadmap)') || result.jsFramework.includes('(In Roadmap)')) {
       info("Eu falei que esta no Roadmap, vai lá tente outra vez tvam create")
       return
     }
 
-    info("Criando projeto Tizen com Vue.js")
+    info(`Criando projeto ${result.platform} com ${result.jsFramework}`)
 
     let mkdir = `mkdir ${projectName}`
     await system.run(`${mkdir}`)
@@ -54,11 +54,18 @@ module.exports = {
 
     let cdIn = `cd ${projectName}`
 
-    let createTizen = 'tizen create web-project -n tizenProject -t BasicEmptyProject -p tv-samsung-5.0'
-    await system.run(`${cdIn};${createTizen}`)
+    if (result.platform == 'Tizen (Samsung)' || result.platform == 'Both') {
+      let createTizen = 'tizen create web-project -n tizenProject -t BasicEmptyProject -p tv-samsung-5.0'
+      await system.run(`${cdIn};${createTizen}`)
+      prepareTizenProject(system, generate, projectName)
+    }
 
-    prepareTizenProject(system, generate, projectName)
-    
+    if (result.platform == 'Web OS (LG)' || result.platform == 'Both') {
+      let createAres = 'ares-generate -p "id=com.example.sampleapp" aresProject'
+      await system.run(`${cdIn};${createAres}`)
+      prepareAresProject(system, generate, projectName)
+    }
+
     info('Projeto criado')
     info('')
     info('Lembre se de sempre consultar as Docs')
@@ -75,7 +82,7 @@ module.exports = {
 }
 
 function generateVueJs(generate, projectName) {
-  
+
   generate({
     template: 'vuejs/dist/index.html',
     target: `${projectName}/dist/index.html`
@@ -129,6 +136,27 @@ function prepareTizenProject(system, generate, projectName) {
   generate({
     template: 'tizen/.gitignore',
     target: `${projectName}/tizenProject/.gitignore`
+  })
+
+}
+
+function prepareAresProject(system, generate, projectName) {
+
+  // Remover index.html e main.js e pasta css
+  let cdIn = `cd ${projectName}/aresProject`
+  let remove = 'rm -rf index.html main.js css'
+  system.run(`${cdIn};${remove}`)
+
+  // Modificar appinfo.json
+  generate({
+    template: 'ares/appinfo.json',
+    target: `${projectName}/aresProject/appinfo.json`
+  })
+
+  // Add .gitignore
+  generate({
+    template: 'ares/.gitignore',
+    target: `${projectName}/aresProject/.gitignore`
   })
 
 }
