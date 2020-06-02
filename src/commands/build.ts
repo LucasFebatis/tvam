@@ -51,13 +51,13 @@ module.exports = {
 
     if (resultBuild.platform === "Web OS (LG)" || resultBuild.platform === "Both") {
 
-      let cpDist = 'cp -av dist webOSProject'
-      let webosBuild = 'ares-package webOSProject -o ./webOSProject'
+      let cpDist = 'cp -av dist aresProject'
+      let webosBuild = 'ares-package aresProject -o ./aresProject'
 
       await system.run(`${cpDist};${webosBuild}`)
 
       info(``)
-      info(`Se tudo ocorreu bem vc deve ter um novo ipk na pasta webOSProject esperando para ser instalado ou publicado`)
+      info(`Se tudo ocorreu bem vc deve ter um novo ipk na pasta aresProject esperando para ser instalado ou publicado`)
       info(``)
 
     }
