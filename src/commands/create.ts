@@ -54,13 +54,13 @@ module.exports = {
 
     let cdIn = `cd ${projectName}`
 
-    if (result.platform == 'Tizen (Samsung)' || result.platform == 'Both') {
+    if (result.platform === 'Tizen (Samsung)' || result.platform === 'Both') {
       let createTizen = 'tizen create web-project -n tizenProject -t BasicEmptyProject -p tv-samsung-5.0'
       await system.run(`${cdIn};${createTizen}`)
       prepareTizenProject(system, generate, projectName)
     }
 
-    if (result.platform == 'Web OS (LG)' || result.platform == 'Both') {
+    if (result.platform === 'Web OS (LG)' || result.platform === 'Both') {
       let createAres = 'ares-generate -p "id=com.example.sampleapp" aresProject'
       await system.run(`${cdIn};${createAres}`)
       prepareAresProject(system, generate, projectName)
