@@ -9,6 +9,20 @@ Tizen com VueJs
 
 Futuramente a ideia é ser possivel criar projetos para a Web OS da LG, e usar Vue.js e React
 
+# Você pode não gostar
+
+- Os builds não podem usar chunchs
+
+- Você sempre estará limitado a versão do Chromium instalado na Tv
+
+- Tvs Tizen (Samsung)
+
+https://developer.samsung.com/smarttv/develop/specifications/web-engine-specifications.html
+
+- Tvs webOS (LG)
+
+http://webostv.developer.lge.com/discover/specifications/web-engine/
+
 ## Installation
 
 `npm i -g tvam`
