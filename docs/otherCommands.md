@@ -15,6 +15,6 @@ Source: http://webostv.developer.lge.com/sdk/tools/using-webos-tv-cli/
 ## Inspect
 
 *Requires old version Chromium
-* Chromium v68
+* Chromium v68 available when downloading the IDE via ComponentManager
 
 `ares-inspect --device emulator --app com.example.sampleapp`
