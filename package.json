@@ -1,10 +1,14 @@
 {
   "name": "tvam",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Tv App Manager CLI",
   "private": false,
   "author": "Lucas Batista",
   "types": "build/types/types.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LucasFebatis/tvam"
+  },
   "bin": {
     "tvam": "bin/tvam"
   },
