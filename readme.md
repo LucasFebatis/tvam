@@ -9,9 +9,9 @@ Tizen com VueJs
 
 Futuramente a ideia é ser possivel criar projetos para a Web OS da LG, e usar Vue.js e React
 
-# Você pode não gostar
+## Você pode não gostar
 
-- Os builds não podem usar chunchs
+- Os builds não podem usar chunks
 
 - Você sempre estará limitado a versão do Chromium instalado na Tv
 
@@ -22,6 +22,23 @@ https://developer.samsung.com/smarttv/develop/specifications/web-engine-specific
 - Tvs webOS (LG)
 
 http://webostv.developer.lge.com/discover/specifications/web-engine/
+
+## Pro Tips
+
+### Chromium
+- Você pode encontrar versões antigas do Chromium aqui:
+
+https://www.chromium.org/getting-involved/download-chromium
+
+### Transpilando dependências
+
+- Por conveniência o `tvam create` cria o projeto usando babel com o `@babel/preset-env` para os arquivos do projeto. Porém, você pode precisar transpilar algumas dependências para que navegadores antigos suportem, Se esse for seu caso você pode conferir outros exemplos de configurações no respositório do babel:
+
+https://github.com/babel/babel-configuration-examples
+
+- Lembre se de atualizar também webpack.config.js para continuar ignorarando o node_modules, mas permitindo o babel transpilar as dependências necessárias
+
+`exclude: /node_modules\/(?![module1|module2])/`
 
 ## Installation
 
