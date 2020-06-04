@@ -3,11 +3,29 @@
 
 # Tv App Manager Cli
 
-Atualmente criando, buildando, servindo e instalando apps 
+Atualmente criando, buildando e instalando apps 
 
 Tizen com VueJs
 
-Futuramente a ideia é ser possivel criar projetos para a Web OS da LG, e usar Vue.js e React
+e
+
+webOS com VueJs
+
+Futuramente a ideia é ser possivel criar projetos com React também
+
+## Installation
+
+`npm i -g tvam`
+
+or
+
+`yarn global add tvam`
+
+## Tutoriais
+
+[Passo a Passo: Instalando no Tizen](https://github.com/LucasFebatis/tvam/blob/master/docs/tutorial%20install%20on%20tizen.md)
+
+[Passo a Passo: Instalando no Web OS](https://github.com/LucasFebatis/tvam/blob/master/docs/tutorial%20install%20on%20web%20os.md)
 
 ## Você pode não gostar
 
@@ -39,20 +57,6 @@ https://github.com/babel/babel-configuration-examples
 - Lembre se de atualizar também webpack.config.js para continuar ignorarando o node_modules, mas permitindo o babel transpilar as dependências necessárias
 
 `exclude: /node_modules\/(?![module1|module2])/`
-
-## Installation
-
-`npm i -g tvam`
-
-or
-
-`yarn global add tvam`
-
-## Tutoriais
-
-[Passo a Passo: Instalando no Tizen](https://github.com/LucasFebatis/tvam/blob/master/docs/tutorial%20install%20on%20tizen.md)
-
-[Passo a Passo: Instalando no Web OS](https://github.com/LucasFebatis/tvam/blob/master/docs/tutorial%20install%20on%20web%20os.md)
 
 ## Usage
 
