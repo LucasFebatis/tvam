@@ -22,7 +22,23 @@ module.exports = {
       }
 
       else if (parameters.first.includes(".ipk")) {
-        let localInstall = `ares-install ${parameters.first}`
+
+        info(``)
+
+        let listAresDevicesCmd = "ares-setup-device --list"
+        let listAresDevices = await system.run(`${listAresDevicesCmd}`)
+
+        info(listAresDevices)
+
+        const resultAresAsk = await prompt.ask([
+          {
+            type: 'input',
+            name: 'tvName',
+            message: 'Tv Name',
+          },
+        ])
+
+        let localInstall = `ares-install ${parameters.first} -d ${resultAresAsk.tvName}`
         let localResult = await system.run(`${localInstall}`)
         info(localResult)
         return
