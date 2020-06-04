@@ -8,6 +8,10 @@ Source: http://webostv.developer.lge.com/sdk/tools/using-webos-tv-cli/
 
 `ares-setup-device --list`
 
+## Generate Private Key to connect
+
+`ares-novacom --device tv2 --getkey`
+
 ## Launch
 
 `ares-launch --device emulator com.example.sampleapp`

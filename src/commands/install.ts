@@ -57,9 +57,24 @@ module.exports = {
     }
 
     if (resultInstall.platform === "Web OS (LG)") {
+
+      info(``)
+
+      let listAresDevicesCmd = "ares-setup-device --list"
+      let listAresDevices = await system.run(`${listAresDevicesCmd}`)
+
+      info(listAresDevices)
+
+      const resultAresAsk = await prompt.ask([
+        {
+          type: 'input',
+          name: 'tvName',
+          message: 'Tv Name',
+        },
+      ])
+
       let cdIn = 'cd aresProject'
-      // ares-inspect -a com.domain.app -d tv2
-      let installwebOS = `ares-install com.domain.app_0.0.1_all.ipk`
+      let installwebOS = `ares-install com.example.sampleapp_0.0.1_all.ipk -d ${resultAresAsk.tvName}`
       await system.run(`${cdIn};${installwebOS}`)
 
       info(``)
