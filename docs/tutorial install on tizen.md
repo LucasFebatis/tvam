@@ -20,7 +20,7 @@ Para esse tutorial, será preciso ter baixado o conjunto com a IDE, para ter as 
 
 Pode ser que você precise instalar os seguintes pacotes pelo package-manager
  - TizenSDK Tools
- - Tv Extensions 5.5
+ - Tv Extensions 5.5 ou maior
  - Tv Extensions Tools
  - Samsung Certificate Extension
 
