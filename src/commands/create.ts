@@ -1,4 +1,3 @@
-
 import { prompt, GluegunToolbox } from 'gluegun'
 
 module.exports = {
@@ -30,18 +29,26 @@ module.exports = {
         type: 'select',
         name: 'platform',
         message: 'Which platform will you develop?',
-        choices: ['Tizen (Samsung)', 'Web OS (LG)', 'Both'],
+        choices: ['Tizen (Samsung)', 'Web OS (LG)', 'Both']
       },
       {
         type: 'select',
         name: 'jsFramework',
         message: 'Which framework will you use?',
-        choices: ['Vue.js', 'React (In Roadmap)', 'Node.js (In Roadmap)', 'only Javascript (In Roadmap)'],
+        choices: [
+          'Vue.js',
+          'React (In Roadmap)',
+          'Node.js (In Roadmap)',
+          'only Javascript (In Roadmap)'
+        ]
       }
     ])
 
-    if (result.platform.includes('(In Roadmap)') || result.jsFramework.includes('(In Roadmap)')) {
-      info("Eu falei que esta no Roadmap, vai lá tente outra vez tvam create")
+    if (
+      result.platform.includes('(In Roadmap)') ||
+      result.jsFramework.includes('(In Roadmap)')
+    ) {
+      info('Eu falei que esta no Roadmap, vai lá tente outra vez tvam create')
       return
     }
 
@@ -55,7 +62,8 @@ module.exports = {
     let cdIn = `cd ${projectName}`
 
     if (result.platform === 'Tizen (Samsung)' || result.platform === 'Both') {
-      let createTizen = 'tizen create web-project -n tizenProject -t BasicEmptyProject -p tv-samsung-5.0'
+      let createTizen =
+        'tizen create web-project -n tizenProject -t BasicEmptyProject -p tv-samsung-5.0'
       await system.run(`${cdIn};${createTizen}`)
       prepareTizenProject(system, generate, projectName)
     }
@@ -78,11 +86,10 @@ module.exports = {
     info('webOS TV: http://webostv.developer.lge.com/')
     info('')
     info('Good Coding!!!')
-  },
+  }
 }
 
 function generateVueJs(generate, projectName) {
-
   generate({
     template: 'vuejs/dist/index.html',
     target: `${projectName}/dist/index.html`
@@ -120,7 +127,6 @@ function generateVueJs(generate, projectName) {
 }
 
 function prepareTizenProject(system, generate, projectName) {
-
   // Remover index.html e main.js e pasta css
   let cdIn = `cd ${projectName}/tizenProject`
   let remove = 'rm -rf index.html main.js css'
@@ -137,11 +143,9 @@ function prepareTizenProject(system, generate, projectName) {
     template: 'tizen/.gitignore',
     target: `${projectName}/tizenProject/.gitignore`
   })
-
 }
 
 function prepareAresProject(system, generate, projectName) {
-
   // Remover index.html e main.js e pasta css
   let cdIn = `cd ${projectName}/aresProject`
   let remove = 'rm -rf index.html main.js css'
@@ -158,5 +162,4 @@ function prepareAresProject(system, generate, projectName) {
     template: 'ares/.gitignore',
     target: `${projectName}/aresProject/.gitignore`
   })
-
 }

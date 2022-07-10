@@ -1,6 +1,4 @@
-
 import { GluegunToolbox } from 'gluegun'
-
 
 module.exports = {
   name: 'install',
@@ -14,18 +12,15 @@ module.exports = {
     } = toolbox
 
     if (parameters.first) {
-      if (parameters.first.includes(".wgt")) {
+      if (parameters.first.includes('.wgt')) {
         let localInstall = `tizen install -n ${parameters.first} -- ./`
         let localResult = await system.run(`${localInstall}`)
         info(localResult)
         return
-      }
-
-      else if (parameters.first.includes(".ipk")) {
-
+      } else if (parameters.first.includes('.ipk')) {
         info(``)
 
-        let listAresDevicesCmd = "ares-setup-device --list"
+        let listAresDevicesCmd = 'ares-setup-device --list'
         let listAresDevices = await system.run(`${listAresDevicesCmd}`)
 
         info(listAresDevices)
@@ -34,21 +29,18 @@ module.exports = {
           {
             type: 'input',
             name: 'tvName',
-            message: 'Tv Name',
-          },
+            message: 'Tv Name'
+          }
         ])
 
         let localInstall = `ares-install ${parameters.first} -d ${resultAresAsk.tvName}`
         let localResult = await system.run(`${localInstall}`)
         info(localResult)
         return
-      }
-
-      else {
-        info("Arquivo não suportado")
+      } else {
+        info('Arquivo não suportado')
         return
       }
-
     }
 
     const resultInstall = await prompt.ask([
@@ -56,27 +48,26 @@ module.exports = {
         type: 'select',
         name: 'platform',
         message: 'Install in',
-        choices: ['Tizen (Samsung)', 'Web OS (LG)'],
-      },
+        choices: ['Tizen (Samsung)', 'Web OS (LG)']
+      }
     ])
 
-    if (resultInstall.platform === "Tizen (Samsung)") {
-
+    if (resultInstall.platform === 'Tizen (Samsung)') {
       let cdIn = 'cd tizenProject'
       let installTizen = `tizen install -n tizenProject.wgt -- ./`
       await system.run(`${cdIn};${installTizen}`)
 
       info(``)
-      info(`Se a instalação foi sucedida e o app não é mostrado, pode ser que vc precise reiniciar a tv ou o emulador`)
+      info(
+        `Se a instalação foi sucedida e o app não é mostrado, pode ser que vc precise reiniciar a tv ou o emulador`
+      )
       info(``)
-
     }
 
-    if (resultInstall.platform === "Web OS (LG)") {
-
+    if (resultInstall.platform === 'Web OS (LG)') {
       info(``)
 
-      let listAresDevicesCmd = "ares-setup-device --list"
+      let listAresDevicesCmd = 'ares-setup-device --list'
       let listAresDevices = await system.run(`${listAresDevicesCmd}`)
 
       info(listAresDevices)
@@ -85,8 +76,8 @@ module.exports = {
         {
           type: 'input',
           name: 'tvName',
-          message: 'Tv Name',
-        },
+          message: 'Tv Name'
+        }
       ])
 
       let cdIn = 'cd aresProject'
@@ -94,11 +85,12 @@ module.exports = {
       await system.run(`${cdIn};${installwebOS}`)
 
       info(``)
-      info(`Se a instalação foi sucedida e o app não é mostrado, pode ser que vc precise reiniciar a tv ou o emulador`)
+      info(
+        `Se a instalação foi sucedida e o app não é mostrado, pode ser que vc precise reiniciar a tv ou o emulador`
+      )
       info(``)
-
     }
 
     info(`install command executed`)
-  },
+  }
 }
