@@ -5,8 +5,8 @@ module.exports = {
   alias: ['s'],
   run: async (toolbox: GluegunToolbox) => {
     const {
-      print: { info }
+      print: { error }
     } = toolbox
-    info(`serve command executed`)
+    error(`serve command não implementado`)
   }
 }
