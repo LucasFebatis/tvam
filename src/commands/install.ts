@@ -53,9 +53,8 @@ module.exports = {
     ])
 
     if (resultInstall.platform === 'Tizen (Samsung)') {
-      let cdIn = 'cd tizenProject'
       let installTizen = `tizen install -n tizenProject.wgt -- ./`
-      await system.run(`${cdIn};${installTizen}`)
+      await system.run(`${installTizen}`, { cwd: 'tizenProject' })
 
       info(``)
       info(
@@ -67,22 +66,20 @@ module.exports = {
     if (resultInstall.platform === 'Web OS (LG)') {
       info(``)
 
-      let listAresDevicesCmd = 'ares-setup-device --list'
-      let listAresDevices = await system.run(`${listAresDevicesCmd}`)
-
-      info(listAresDevices)
-
-      const resultAresAsk = await prompt.ask([
+      const resultAresAskWhere = await prompt.ask([
         {
-          type: 'input',
-          name: 'tvName',
-          message: 'Tv Name'
+          type: 'select',
+          name: 'where',
+          message: 'Install webOS app in',
+          choices: ['Simulator', 'Emulator']
         }
       ])
 
-      let cdIn = 'cd aresProject'
-      let installwebOS = `ares-install com.example.sampleapp_0.0.1_all.ipk -d ${resultAresAsk.tvName}`
-      await system.run(`${cdIn};${installwebOS}`)
+      if (resultAresAskWhere.where === 'Simulator') {
+        await installInWebOSSimulator(system, info)
+      } else if (resultAresAskWhere.where === 'Emulator') {
+        await  installInWebOSEmulator(system, info, prompt)
+      }
 
       info(``)
       info(
@@ -93,4 +90,31 @@ module.exports = {
 
     info(`install command executed`)
   }
+}
+
+
+
+async function installInWebOSSimulator(system, info) {
+  let installwebOS = `ares-launch -s 22 ./`
+  await system.run(`${installwebOS}`, { cwd: 'aresProject' })
+}
+
+async function installInWebOSEmulator(system, info, prompt) {
+
+  let listAresDevicesCmd = 'ares-setup-device --list'
+  let listAresDevices = await system.run(`${listAresDevicesCmd}`)
+
+  info(listAresDevices)
+
+  const resultAresAsk = await prompt.ask([
+    {
+      type: 'input',
+      name: 'tvName',
+      message: 'Tv Name'
+    }
+  ])
+
+  let installwebOS = `ares-install com.example.sampleapp_0.0.1_all.ipk -d ${resultAresAsk.tvName}`
+  await system.run(`${installwebOS}`, { cwd: 'aresProject' })
+
 }

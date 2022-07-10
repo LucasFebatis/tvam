@@ -8,6 +8,7 @@ module.exports = {
       print: { info },
       template: { generate },
       system,
+      filesystem,
       parameters
     } = toolbox
 
@@ -15,11 +16,16 @@ module.exports = {
 
     doctorResult
       .then(result => {
-        let isError = includesError(result)
-        if (!isError) {
-          runCommand(parameters, prompt, system, info, generate)
-            .then(() => info('done'))
-            .catch(() => info('error'))
+        let countError = includesError(result)
+        if (countError == 0) {
+          runCommand(parameters, prompt, system, filesystem, info, generate)
+            .then(() => console.log('done'))
+            .catch(error => console.log(error))
+        } else if (countError == 1) {
+          info(result)
+          runCommand(parameters, prompt, system, filesystem, info, generate)
+            .then(() => console.log('done'))
+            .catch(error => console.log(error))
         } else {
           info(result)
         }
@@ -30,7 +36,14 @@ module.exports = {
   }
 }
 
-async function runCommand(parameters, prompt, system, info, generate) {
+async function runCommand(
+  parameters,
+  prompt,
+  system,
+  filesystem,
+  info,
+  generate
+) {
   if (!parameters.first) {
     info('Informe o nome do projeto: e.g tvam create myApp')
     return
@@ -77,19 +90,19 @@ async function runCommand(parameters, prompt, system, info, generate) {
 
   generateVueJs(generate, projectName)
 
-  let cdIn = `cd ${projectName}`
-
   if (result.platform === 'Tizen (Samsung)' || result.platform === 'Both') {
     let createTizen =
       'tizen create web-project -n tizenProject -t BasicEmptyProject -p tv-samsung-5.0'
-    await system.run(`${cdIn};${createTizen}`)
-    prepareTizenProject(system, generate, projectName)
+    await system.run(`${createTizen}`)
+    filesystem.move('tizenProject', `${projectName}/tizenProject`)
+    prepareTizenProject(filesystem, generate, projectName)
   }
 
   if (result.platform === 'Web OS (LG)' || result.platform === 'Both') {
     let createAres = 'ares-generate -p "id=com.example.sampleapp" aresProject'
-    await system.run(`${cdIn};${createAres}`)
-    prepareAresProject(system, generate, projectName)
+    await system.run(`${createAres}`)
+    filesystem.move('aresProject', `${projectName}/aresProject`)
+    prepareAresProject(filesystem, generate, projectName)
   }
 
   info('Projeto criado')
@@ -107,7 +120,7 @@ async function runCommand(parameters, prompt, system, info, generate) {
 }
 
 function includesError(str: String) {
-  return str.includes('não encontrado')
+  return (str.match(/não encontrado/g) || []).length
 }
 
 function generateVueJs(generate, projectName) {
@@ -147,11 +160,12 @@ function generateVueJs(generate, projectName) {
   })
 }
 
-function prepareTizenProject(system, generate, projectName) {
+function prepareTizenProject(filesystem, generate, projectName) {
   // Remover index.html e main.js e pasta css
-  let cdIn = `cd ${projectName}/tizenProject`
-  let remove = 'rm -rf index.html main.js css'
-  system.run(`${cdIn};${remove}`)
+  let platformPath = `${projectName}/tizenProject`
+  filesystem.remove(`${platformPath}/index.html`)
+  filesystem.remove(`${platformPath}/main.js`)
+  filesystem.remove(`${platformPath}/css`)
 
   // Modificar config.xml
   generate({
@@ -166,11 +180,12 @@ function prepareTizenProject(system, generate, projectName) {
   })
 }
 
-function prepareAresProject(system, generate, projectName) {
+function prepareAresProject(filesystem, generate, projectName) {
   // Remover index.html e main.js e pasta css
-  let cdIn = `cd ${projectName}/aresProject`
-  let remove = 'rm -rf index.html main.js css'
-  system.run(`${cdIn};${remove}`)
+  let platformPath = `${projectName}/aresProject`
+  filesystem.remove(`${platformPath}/index.html`)
+  filesystem.remove(`${platformPath}/main.js`)
+  filesystem.remove(`${platformPath}/css`)
 
   // Modificar appinfo.json
   generate({

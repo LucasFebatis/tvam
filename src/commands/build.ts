@@ -7,6 +7,7 @@ module.exports = {
     const {
       print: { info },
       system,
+      filesystem,
       parameters,
       prompt
     } = toolbox
@@ -23,7 +24,8 @@ module.exports = {
     let yarnInstall = 'yarn install'
     let yarnBuild = 'yarn build'
 
-    await system.run(`${yarnInstall};${yarnBuild}`)
+    await system.run(`${yarnInstall}`)
+    await system.run(`${yarnBuild}`)
 
     if (
       resultBuild.platform === 'Tizen (Samsung)' ||
@@ -37,11 +39,10 @@ module.exports = {
         await generateCertAndProfileIfNecessary(info, system)
       }
 
-      let cpDist = 'cp -av dist tizenProject'
-      let cdIn = 'cd tizenProject'
       let tizenBuild = `tizen package -t wgt -s ${projectCert}`
 
-      await system.run(`${cpDist};${cdIn};${tizenBuild}`)
+      filesystem.copy(`dist`, 'tizenProject/dist', { overwrite: true })
+      await system.run(`${tizenBuild}`, { cwd: 'tizenProject' })
 
       info(``)
       info(
@@ -54,10 +55,10 @@ module.exports = {
       resultBuild.platform === 'Web OS (LG)' ||
       resultBuild.platform === 'Both'
     ) {
-      let cpDist = 'cp -av dist aresProject'
       let webosBuild = 'ares-package aresProject -o ./aresProject'
 
-      await system.run(`${cpDist};${webosBuild}`)
+      filesystem.copy(`dist`, 'aresProject/dist', { overwrite: true })
+      await system.run(`${webosBuild}`)
 
       info(``)
       info(

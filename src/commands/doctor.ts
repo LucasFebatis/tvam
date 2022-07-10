@@ -16,8 +16,8 @@ module.exports = {
 
     resultTizen
       .then(result => {
-        info(`Tizen CLI encontrado\n`)
-        info(resultTizen)
+        info(`Tizen CLI encontrado`)
+        info(result)
       })
       .catch(() => {
         error(`Tizen CLI não encontrado`)
@@ -28,8 +28,8 @@ module.exports = {
 
     resultWebOs
       .then(result => {
-        info(`webOS TV CLI encontrado\n`)
-        info(resultWebOs)
+        info(`webOS TV CLI encontrado`)
+        info(result)
       })
       .catch(() => {
         error(`webOS TV CLI não encontrado`)
