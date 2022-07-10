@@ -5,35 +5,37 @@ module.exports = {
   alias: ['d'],
   run: async (toolbox: GluegunToolbox) => {
     const {
-      print: { info },
+      print: { info, error },
       system
     } = toolbox
 
-    let resultTizen = await system.run('tizen version')
-    let resultWebOs = await system.run('ares --version')
+    let resultTizen = system.run('tizen version')
+    let resultWebOs = system.run('ares --version')
 
     info(``)
 
-    if (resultTizen.includes('command not found')) {
-      info(`Tizen CLI não encontrado`)
-      info(
-        `Garanta que Tizen CLI esteja instalado corretamente e incluso no PATH`
-      )
-    } else {
-      info(`Tizen CLI encontrado`)
-      info(resultTizen)
-    }
+    resultTizen
+      .then(result => {
+        info(`Tizen CLI encontrado\n`)
+        info(resultTizen)
+      })
+      .catch(() => {
+        error(`Tizen CLI não encontrado`)
+        error(
+          `Garanta que Tizen CLI esteja instalado corretamente e incluso no PATH\n`
+        )
+      })
 
-    if (resultWebOs.includes('command not found')) {
-      info(`webOS TV CLI não encontrado`)
-      info(
-        `Garanta que webOS TV CLI esteja instalado corretamente e incluso no PATH`
-      )
-    } else {
-      info(`webOS TV CLI encontrado`)
-      info(resultWebOs)
-    }
-
-    info(`doctor command executed`)
+    resultWebOs
+      .then(result => {
+        info(`webOS TV CLI encontrado\n`)
+        info(resultWebOs)
+      })
+      .catch(() => {
+        error(`webOS TV CLI não encontrado`)
+        error(
+          `Garanta que webOS TV CLI esteja instalado corretamente e incluso no PATH\n`
+        )
+      })
   }
 }
