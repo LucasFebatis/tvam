@@ -125,7 +125,7 @@ function includesError(str: String) {
 
 function generateVueJs(generate, projectName) {
   generate({
-    template: 'vuejs/dist/index.html',
+    template: 'vuejs/dist_bin/index.html',
     target: `${projectName}/dist/index.html`
   })
 
