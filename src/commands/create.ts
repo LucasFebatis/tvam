@@ -17,11 +17,11 @@ module.exports = {
     doctorResult
       .then(result => {
         let countError = includesError(result)
-        if (countError == 0) {
+        if (countError === 0) {
           runCommand(parameters, prompt, system, filesystem, info, generate)
             .then(() => console.log('done'))
             .catch(error => console.log(error))
-        } else if (countError == 1) {
+        } else if (countError === 1) {
           info(result)
           runCommand(parameters, prompt, system, filesystem, info, generate)
             .then(() => console.log('done'))
