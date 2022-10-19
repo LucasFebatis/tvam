@@ -18,6 +18,7 @@ module.exports = {
       .then(result => {
         info(`Tizen CLI encontrado`)
         info(result)
+        executeWhere(system, info, error, 'tizen')
       })
       .catch(() => {
         error(`Tizen CLI não encontrado`)
@@ -30,6 +31,7 @@ module.exports = {
       .then(result => {
         info(`webOS TV CLI encontrado`)
         info(result)
+        executeWhere(system, info, error, 'ares')
       })
       .catch(() => {
         error(`webOS TV CLI não encontrado`)
@@ -38,4 +40,17 @@ module.exports = {
         )
       })
   }
+}
+
+function executeWhere(system, info, error, command) {
+  let resultWhere = system.run(`where ${command}`)
+
+  resultWhere
+    .then(result => {
+      info(`Caminho: `)
+      info(result)
+    })
+    .catch(() => {
+      error(`Erro ao encontrar caminho do SDK`)
+    })
 }
