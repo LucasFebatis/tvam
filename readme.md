@@ -39,7 +39,7 @@ https://developer.samsung.com/smarttv/develop/specifications/web-engine-specific
 
 - Tvs webOS (LG)
 
-http://webostv.developer.lge.com/discover/specifications/web-engine/
+https://webostv.developer.lge.com/develop/specifications/web-api-and-web-engine#web-engine
 
 ## Pro Tips
 
