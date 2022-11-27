@@ -58,6 +58,16 @@ https://github.com/babel/babel-configuration-examples
 
 `exclude: /node_modules\/(?![module1|module2])/`
 
+### Detectando versão do EcmaScript
+
+https://www.whatismybrowser.com/detect/ecma-script-version
+
+### Versões anteriores dos Emuladores
+
+Archive: https://developer.samsung.com/smarttv/develop/tools/tv-extension/archive.html
+
+Passo a passo para instalação: https://developer.samsung.com/smarttv/develop/getting-started/setting-up-sdk/installing-tv-sdk.html
+
 ## Usage
 
 ### tvam doctor
